@@ -35,7 +35,7 @@ const fn select_random(arr: &[&'static str], rand_num: usize) -> &'static str {
 }
 
 static QA_MAP: phf::Map<&'static str, fn(usize) -> &'static str> = phf_map! {
-    "Can you tell me a fact about animals?" => |rand_num| {select_random(&ANIMAL_FACTS,rand_num)},
+    "Can you tell me a fact about animals ?" => |rand_num| {select_random(&ANIMAL_FACTS,rand_num)},
     "Can give me a famous quote ?" => |rand_num| {select_random(&QUOTES,rand_num)},
     "How many countries on earth are there ?" => |_| {"There are 195 Countries On earth"},
     "Do we have a room temperature ambient pressure super conductor ?" => |_| {"Its still up for debate, but i sure hope so."},
