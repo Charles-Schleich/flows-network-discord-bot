@@ -27,7 +27,7 @@ async fn handler(bot: &ProvidedBot, msg: Message) {
     // }
 
     let channel_id = msg.channel_id;
-    let resp = format!("Welcome to flows.network.\nYou just said: '{}'.\nLearn more at: https://github.com/flows-network/hello-world\n", msg.content);
+    let resp = format!("Hello!.\nYou just said: '{}'\n Well done, very good.", msg.content);
 
     _ = discord.send_message(
         channel_id.into(),
