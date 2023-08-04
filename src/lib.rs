@@ -75,19 +75,14 @@ async fn handler(bot: &ProvidedBot, msg: Message) {
 
     let formatted_questions = QA_MAP.keys().enumerate().fold(
         String::from(
-            "Unfortunately i am limited in my responses, try asking one of these questions",
+            "Unfortunately i am limited in my responses, try asking one of these questions:",
         ),
-        |acc, (i, n)| {
-            format!(
-                "{}\n{}.{}",
-                acc, i, n
-            )
-        },
+        |acc, (i, n)| format!("{}\n{}. {}", acc, i, n),
     );
 
     let resp = match QA_MAP.get(&msg.content) {
         Some(my_func) => my_func(rand_num).to_string(),
-        None => formatted_questions
+        None => formatted_questions,
     };
 
     _ = discord
