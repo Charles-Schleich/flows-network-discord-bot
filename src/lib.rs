@@ -41,10 +41,8 @@ static QA_MAP: phf::Map<&'static str, fn(usize) -> &'static str> = phf_map! {
     "Do we have a room temperature ambient pressure super conductor ?" => |_| {"Its still up for debate, but i sure hope so."},
     "What do VC's in silicon valley wear ?" => |_| {"anything that goes with a Patagonia Beter Sweater"},
     "What does [] + [] in Javascript evaluate to ?" => |_| {"empty string, obviously"},
-    "Why does x86 have so many instructions ?" => |_| {"Because having too few would be too RISC-y."},    
+    "Why does x86 have so many instructions ?" => |_| {"Because having too few would be too RISC-y."},
 };
-
-
 
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
@@ -78,7 +76,10 @@ async fn handler(bot: &ProvidedBot, msg: Message) {
     let formatted_questions = QA_MAP
         .keys()
         .enumerate()
-        .fold(String::new(), |acc, (i, n)| format!("{}\\n{}.{}", acc, i, n));
+        .fold(String::new(), |acc, (i, n)| {
+            format!("{} 
+            {}.{}", acc, i, n)
+        });
 
     let resp = match QA_MAP.get(&msg.content) {
         Some(my_func) => my_func(rand_num).to_string(),
