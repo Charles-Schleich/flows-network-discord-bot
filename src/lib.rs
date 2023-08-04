@@ -35,12 +35,16 @@ const fn select_random(arr: &[&'static str], rand_num: usize) -> &'static str {
 }
 
 static QA_MAP: phf::Map<&'static str, fn(usize) -> &'static str> = phf_map! {
-    "can you tell me a fact about animals?" => |rand_num| {select_random(&ANIMAL_FACTS,rand_num)},
-    "give me a famous quote ?" => |rand_num| {select_random(&QUOTES,rand_num)},
-    "how many countries on earth are there ?" => |_| {"There are 195 Countries On earth"},
-    "do we have a room temperature ambient pressure super conductor ?" => |_| {"Its still up for debate, but i sure hope so."},
-    "what do vc's in silicon valley wear ?" => |_| {"anything that goes with a Patagonia Beter Sweater"},
+    "Can you tell me a fact about animals?" => |rand_num| {select_random(&ANIMAL_FACTS,rand_num)},
+    "Can give me a famous quote ?" => |rand_num| {select_random(&QUOTES,rand_num)},
+    "How many countries on earth are there ?" => |_| {"There are 195 Countries On earth"},
+    "Do we have a room temperature ambient pressure super conductor ?" => |_| {"Its still up for debate, but i sure hope so."},
+    "What do VC's in silicon valley wear ?" => |_| {"anything that goes with a Patagonia Beter Sweater"},
+    "What does [] + [] in Javascript evaluate to ?" => |_| {"empty string, obviously"},
+    "Why does x86 have so many instructions ?" => |_| {"Because having too few would be too RISC-y."},    
 };
+
+
 
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
@@ -74,7 +78,7 @@ async fn handler(bot: &ProvidedBot, msg: Message) {
     let formatted_questions = QA_MAP
         .keys()
         .enumerate()
-        .fold(String::new(), |acc, (i, n)| format!("{}\n{}.{}", acc, i, n));
+        .fold(String::new(), |acc, (i, n)| format!("{}\\n{}.{}", acc, i, n));
 
     let resp = match QA_MAP.get(&msg.content) {
         Some(my_func) => my_func(rand_num).to_string(),
