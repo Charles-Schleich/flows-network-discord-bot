@@ -84,7 +84,7 @@ async fn handler(bot: &ProvidedBot, msg: Message) {
     let resp = match QA_MAP.get(&msg.content) {
         Some(my_func) => my_func(rand_num).to_string(),
         None => {
-            format!("Unfortunately i am limited in my responses, try asking one of these questions '{:?}",formatted_questions)
+            format!("Unfortunately \ni \nam limited in my responses, try asking one of these questions '{:?}",formatted_questions)
         }
     };
 
